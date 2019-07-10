@@ -24,6 +24,10 @@ class DoubanMovieRanking(Spider):
         :param response
         :return: item
         """
+        # 命令行中调试xpath语句
+        # from scrapy.shell import inspect_response
+        # inspect_response(response, self)
+
         print('******************************************1')
         item = DoubanMovieItem()
         movies = response.xpath('//div[@id="content"]//ol[@class="grid_view"]/li')
