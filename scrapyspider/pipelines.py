@@ -16,5 +16,5 @@ class ScrapyspiderPipeline(object):
     def process_item(self, item, spider):
         line = [item['movie_name'], item['score'], item['score_num']]
         self.ws.append(line)
-        self.wb.save('job.xlsx')
+        self.wb.save('E:\\scrapyspider\\scrapyspider\\job.xlsx')
         return item
