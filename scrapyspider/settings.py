@@ -66,8 +66,9 @@ ROBOTSTXT_OBEY = False
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 # 数字代表优先级，越小越优先
 ITEM_PIPELINES = {
-   'scrapyspider.pipelines.ScrapyspiderPipeline': 300,
-   'scrapyspider.pipelines.JsonPipeline': 400,
+   # 'scrapyspider.pipelines.ScrapyspiderPipeline': 300,
+   # 'scrapyspider.pipelines.JsonPipeline': 400,
+   'scrapyspider.pipelines.MysqlPipeline': 200,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

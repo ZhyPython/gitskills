@@ -7,6 +7,7 @@
 from openpyxl import Workbook
 from scrapyspider import items
 import json
+import pymysql
 
 
 class ScrapyspiderPipeline(object):
@@ -44,8 +45,33 @@ class JsonPipeline(object):
         :param spider:
         :return:
         '''
-        print()
         with open('E:\\scrapyspider\\scrapyspider\\ajax.json', 'a', encoding='utf-8') as f:
             line = json.dumps(dict(item), ensure_ascii=False) + "\n"
             f.write(line)
+        return item
+
+
+class MysqlPipeline(object):
+    def process_item(self, item, spider):
+        movie_name = item['movie_name']
+        score = item['score']
+        score_num = item['score_num']
+
+        # 连接数据库
+        connection = pymysql.connect(
+            host='localhost',   # 连接本地数据库
+            user='root',
+            passwd='123',
+            db='scrapydb',
+            charset='utf8mb4',
+            cursorclass=pymysql.cursors.DictCursor)
+
+        try:
+            with connection.cursor() as cursor:
+                sql = 'INSERT INTO movies (movie_name, score, score_num) VALUES (%s, %s, %s)'
+                cursor.execute(sql, (movie_name, score, score_num))
+            connection.commit()
+        finally:
+            connection.close()
+
         return item
