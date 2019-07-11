@@ -29,9 +29,9 @@ class DoubanAjaxSpider(Spider):
 
         # 若datas存在数据则对下一页进行采集, group函数将匹配字符串中的()所匹配的内容放入一个组内，
         # group(0)是整个匹配字符串的匹配内容，group(1)是第一个中括号()匹配的内容
-        print(response.url)
+        # print(response.url)
         page_num = re.search(r'start=(\d+)', response.url).group(1)
-        if int(page_num) < 100:
+        if int(page_num) < 80:
             page_num = 'start=' + str(int(page_num)+20)
             next_url = re.sub(r'start=\d+', page_num, response.url)
             yield Request(next_url, headers=self.headers)

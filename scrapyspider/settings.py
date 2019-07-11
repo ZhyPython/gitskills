@@ -64,8 +64,10 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
+# 数字代表优先级，越小越优先
 ITEM_PIPELINES = {
    'scrapyspider.pipelines.ScrapyspiderPipeline': 300,
+   'scrapyspider.pipelines.JsonPipeline': 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
