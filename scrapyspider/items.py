@@ -20,3 +20,10 @@ class DoubanMovieItem(scrapy.Item):
     movie_name = scrapy.Field()
     score = scrapy.Field()
     score_num = scrapy.Field()
+
+
+class DoubanMovieAjax(scrapy.Item):
+    ranking = scrapy.Field()
+    movie_name = scrapy.Field()
+    score = scrapy.Field()
+    score_num = scrapy.Field()
