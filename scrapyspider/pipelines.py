@@ -75,3 +75,17 @@ class MysqlPipeline(object):
             connection.close()
 
         return item
+
+
+class ProxyPipeline(object):
+    def __init__(self):
+        self.wb = Workbook()
+        self.ws = self.wb.active
+        self.ws.append(['地址', 'IP'])
+
+    def process_item(self, item, spider):
+        if spider.name == 'kdlspider':
+            line = [str(item['addr']), item['port']]
+            self.ws.append(line)
+            self.wb.save('E:\\scrapyspider\\scrapyspider\\proxy.xlsx')
+            return item

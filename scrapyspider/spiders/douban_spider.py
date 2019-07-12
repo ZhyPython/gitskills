@@ -32,6 +32,7 @@ class DoubanMovieRanking(Spider):
         item = DoubanMovieItem()
         movies = response.xpath('//div[@id="content"]//ol[@class="grid_view"]/li')
         print(movies)
+        # 从当前目录解析，注意.//中的.一定要加上
         for movie in movies:
             item['movie_name'] = movie.xpath(
                 './/span[@class="title"]/text()'
@@ -45,7 +46,7 @@ class DoubanMovieRanking(Spider):
             print('******************************************')
             yield item
 
-        # next_url = response.xpath('//span[@class="next"]/a/@href').extract()
-        # if next_url:
-        #     next_url = 'https://movie.douban.com/top250' + next_url[0]
-        #     yield Request(next_url, headers=self.headers)
+        next_url = response.xpath('//span[@class="next"]/a/@href').extract()
+        if next_url:
+            next_url = 'https://movie.douban.com/top250' + next_url[0]
+            yield Request(next_url, headers=self.headers)

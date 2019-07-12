@@ -27,3 +27,8 @@ class DoubanMovieAjax(scrapy.Item):
     movie_name = scrapy.Field()
     score = scrapy.Field()
     score_num = scrapy.Field()
+
+
+class ProxyItem(scrapy.Item):
+    addr = scrapy.Field()
+    port = scrapy.Field()
